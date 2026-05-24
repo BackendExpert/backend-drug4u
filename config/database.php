@@ -1,37 +1,15 @@
-<?php 
+<?php
 
 class Database {
 
-    private $host = 'localhost';
-    private $db_name = 'drug_4_u';
-    private $user = 'root';
-    private $pass = '';
-
-    private function connect() {
-
-        try {
-
-            $conn = new PDO(
-                "mysql:host={$this->host};dbname={$this->db_name}",
-                $this->user,
-                $this->pass
-            );
-
-            $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-            return $conn;
-
-        } catch (Exception $e) {
-
-            die(json_encode([
-                "success" => false,
-                "message" => $e->getMessage()
-            ]));
-
-        }
-
+    public function connect() {
+        return new PDO(
+            "mysql:host=" . $_ENV['DB_HOST'] . ";dbname=" . $_ENV['DB_NAME'],
+            $_ENV['DB_USER'],
+            $_ENV['DB_PASS'],
+            [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]
+        );
     }
-
 }
 
 ?>
