@@ -1,6 +1,6 @@
 <?php 
     class JWT {
-        public static function genarete (
+        public static function generate (
             $payload
         ) {
             $secret = $_ENV['JWT_SECRET'];
