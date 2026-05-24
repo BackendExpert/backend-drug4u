@@ -15,14 +15,20 @@ class AuthController
             !isset($data['email']) ||
             !isset($data['password'])
         ) {
-            echo json_encode(["message" => "All fields required"]);
+            echo json_encode([
+                "success" => false,
+                "message" => "All fields required"
+            ]);
             return;
         }
 
         $userModel = new User;
 
         if ($userModel->findByEmail($data['email'])) {
-            echo json_encode(["message" => "User Already exists"]);
+            echo json_encode([
+                "success" => false,
+                "message" => "User Already exists"
+            ]);
             return;
         }
 
@@ -31,8 +37,10 @@ class AuthController
             $data['email'],
             $data['password']
         );
-
-        echo json_encode(["message" => "User Created Successful"]);
+        echo json_encode([
+            "success" => true,
+            "message" => "User Created Successfully"
+        ]);
     }
 
     public function login()
@@ -43,7 +51,10 @@ class AuthController
             !isset($data['email']) ||
             !isset($data['password'])
         ) {
-            echo json_encode(["message" => "Email & Password required"]);
+            echo json_encode([
+                "success" => false,
+                "message" => "All fields required"
+            ]);
             return;
         }
 
@@ -57,14 +68,16 @@ class AuthController
         }
 
         $token = JWT::generate([
-            "id" => $user['id'],
+            "sub" => $user['id'],
             "email" => $user['email'],
+            "username" => $user['username'],
             "role" => $user['role'],
             "exp" => time() + 3600
         ]);
 
         echo json_encode([
-            "message" => "Login success",
+            "success" => true,
+            "message" => "User Created Successfully",
             "token" => $token
         ]);
     }
