@@ -32,4 +32,19 @@ class User
             password_hash($password, PASSWORD_BCRYPT)
         ]);
     }
+
+    public function fethcall()
+    {
+        $stmt = $this->conn->prepare("SELECT 
+                    id,
+                    username,
+                    email,
+                    role,
+                    created_at
+                FROM user;");
+
+        $stmt->execute();
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 }
