@@ -80,7 +80,7 @@ class AuthController
 
         echo json_encode([
             "success" => true,
-            "message" => "User Created Successfully",
+            "message" => "Login Success",
             "token" => $token
         ]);
     }
@@ -122,7 +122,7 @@ class AuthController
 
         $token = bin2hex(random_bytes(32));
         $token_hash = password_hash($token, PASSWORD_BCRYPT);
-        $expires = date("Y-m-d H:i:s", time() + 3600);
+        $expires = date("Y-m-d H:i:s", time() + 300);
 
         $db = (new Database())->connect();
 
