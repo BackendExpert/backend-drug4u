@@ -12,7 +12,11 @@ if ($uri == '/api/register' && $method == 'POST') {
 } elseif ($uri == '/api/login' && $method == 'POST') {
     $auth->login();
 } elseif ($uri == '/api/profile' && $method == 'GET') {
-    $auth->profile();
+    // $auth->profile();
+} elseif ($uri == '/api/forgot-password' && $method == 'POST') {
+    $auth->forgetPassword();
+} elseif ($uri == '/api/reset-password' && $method == 'POST') {
+    $auth->reset_password();
 } else {
     echo json_encode(["message" => "Route not found"]);
 }
