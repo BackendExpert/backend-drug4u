@@ -3,6 +3,7 @@ require_once __DIR__ . '/../controllers/AuthController.php';
 require_once __DIR__ . '/../middleware/AuthMiddleware.php';
 require_once __DIR__ . '/../controllers/UserController.php';
 require_once __DIR__ . '/../controllers/CustomerController.php';
+require_once __DIR__ . '/../controllers/MedicineController.php';
 
 $uri = $_SERVER['REQUEST_URI'];
 $method = $_SERVER['REQUEST_METHOD'];
@@ -10,6 +11,7 @@ $method = $_SERVER['REQUEST_METHOD'];
 $auth = new AuthController;
 $user = new UserController;
 $customer = new CustomerController;
+$medicine = new MedicineController;
 
 // Auth Controller
 
@@ -54,9 +56,11 @@ elseif (preg_match('#^/api/customer/update-pharmacist/(\d+)$#', $uri, $matches) 
     $customer->UpdateCustomerDataPharmacist($matches[1]);
 }
 
-// elseif ($uri == '/api/reset-password' && $method == 'POST') {
-//     $auth->reset_password();
-// }
+// Medicine Data
+
+elseif ($uri == '/api/medicine/create' && $method == 'POST') {
+    $medicine->CreateMedicine();
+}
 
 // elseif ($uri == '/api/reset-password' && $method == 'POST') {
 //     $auth->reset_password();

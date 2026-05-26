@@ -12,12 +12,13 @@ class Medicine
         $this->conn = $db->connect();
     }
 
-    public function getMedicineByID(int $id)
+    public function getMedicineByName(string $name)
     {
-        $stmt = $this->conn->prepare("SELECT * FROM medicines WHERE id = ?");
-        return $stmt->execute([$id]);
+        $stmt = $this->conn->prepare("SELECT * FROM medicines WHERE name = ?");
+        $stmt->execute([$name]);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
     }
-
+    
     public function CreateMedicine(
         string $name,
         float $price,
@@ -34,6 +35,19 @@ class Medicine
             $age_restriction
         ]);
     }
+
+    public function FetchAllMedicine()
+    {
+        $stmt = $this->conn->prepare("SELECT * FROM medicines");
+        return $stmt->execute();
+    }
+
+    public function FetchAllMedicineByID(int $id)
+    {
+        $stmt = $this->conn->prepare("SELECT * FROM medicines WHERE id = ?");
+        return $stmt->execute([$id]);
+    }
+
 
     public function UpdateMedicine(
         float $price,
@@ -57,7 +71,8 @@ class Medicine
         ]);
     }
 
-    public function DeleteMedicine(int $id) {
+    public function DeleteMedicine(int $id)
+    {
         $stmt = $this->conn->prepare("DELETE FROM medicines WHERE id = ?");
         return $stmt->execute([$id]);
     }
