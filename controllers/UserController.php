@@ -6,17 +6,17 @@ require_once __DIR__ . '/../middleware/AuthMiddleware.php';
 
 class UserController
 {
-    public static function FetchALlUsers()
+    public static function FetchAllUsers()
     {
         $user = AuthMiddleware::handle();
 
 
-        if ($user->role !== 'admin' && $user->role !== 'super_admin') {
+        if ($user['role'] !== 'admin' && $user['role'] !== 'super_admin') {
             http_response_code(403);
             echo json_encode(["message" => "Forbidden"]);
             return;
         }
-        
+
         $userModel = new User;
 
         $users = $userModel->fethcall();
@@ -31,7 +31,7 @@ class UserController
 
         echo json_encode([
             "success" => true,
-            "data" => $users
+            "result" => $users
         ]);
     }
 }

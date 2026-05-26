@@ -23,6 +23,23 @@ class User
         return $result !== false ? $result : null;
     }
 
+
+    public function findByEmailUsername(string $email, string $username): ?array
+    {
+        $stmt = $this->conn->prepare("
+        SELECT * 
+        FROM user 
+        WHERE email = ? OR username = ?
+        LIMIT 1
+    ");
+
+        $stmt->execute([$email, $username]);
+
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        return $result !== false ? $result : null;
+    }
+
     public function create(string $username, string $email, string $password)
     {
         $stmt = $this->conn->prepare("INSERT INTO user (username, email, password) VALUES (?, ?, ?)");

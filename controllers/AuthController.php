@@ -27,7 +27,7 @@ class AuthController
 
         $userModel = new User;
 
-        if ($userModel->findByEmail($data['email'])) {
+        if ($userModel->findByEmailUsername($data['email'], $data['username'])) {
             echo json_encode([
                 "success" => false,
                 "message" => "User Already exists"
