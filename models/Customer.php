@@ -46,8 +46,11 @@ class Customer
         $check->execute([$user_id]);
         $customer = $check->fetch(PDO::FETCH_ASSOC);
 
-        if ($customer) {
+        $fullname = trim((string)$fullname) === '' ? null : $fullname;
+        $address = trim((string)$address) === '' ? null : $address;
+        $age = ($age === '' || $age === null) ? null : $age;
 
+        if ($customer) {
             $stmt = $this->conn->prepare("
             UPDATE customer 
             SET 
@@ -89,6 +92,7 @@ class Customer
         }
     }
 
+
     public function getMyCustomerData(string $user_id)
     {
         $stmt = $this->conn->prepare("SELECT * FROM customer WHERE user_id = ?");
@@ -99,10 +103,10 @@ class Customer
         return $result !== false ? $result : null;
     }
 
-    public function getCustomers(int $user_id)
+    public function getCustomer(int $id)
     {
-        $stmt = $this->conn->prepare("SELECT * FROM customer WHERE user_id = ?");
-        $stmt->execute([$user_id]);
+        $stmt = $this->conn->prepare("SELECT * FROM customer WHERE id = ?");
+        $stmt->execute([$id]);
 
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
@@ -120,7 +124,7 @@ class Customer
     }
 
     public function updateCustomerDataPharmacist(
-        int $user_id,
+        int $id,
         array $allergies,
         array $medical_conditions
     ) {
@@ -133,13 +137,13 @@ class Customer
         SET 
             allergies = ?, 
             medical_conditions = ?
-        WHERE user_id = ?
+        WHERE id = ?
     ");
 
         return $stmt->execute([
             $allergiesJson,
             $medicalConditionsJson,
-            $user_id
+            $id
         ]);
     }
 }

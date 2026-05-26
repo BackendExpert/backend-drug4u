@@ -10,7 +10,7 @@ date_default_timezone_set('Asia/Colombo');
 $frontend = $_ENV['FRONTEND_URL'] ?? 'http://localhost:5173';
 
 header("Access-Control-Allow-Origin: $frontend");
-header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");
+header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS, PATCH");
 header("Access-Control-Allow-Headers: Content-Type, Authorization, X-Device-Id");
 header("Access-Control-Allow-Credentials: true");
 

@@ -75,7 +75,7 @@ class AuthController
             "email" => $user['email'],
             "username" => $user['username'],
             "role" => $user['role'],
-            "exp" => time() + 3600
+            "exp" => time() + 86400
         ]);
 
         echo json_encode([

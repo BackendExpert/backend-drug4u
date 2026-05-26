@@ -34,12 +34,24 @@ elseif ($uri == '/api/users/fetch-all' && $method == 'GET') {
 
 // Customer Data
 
-elseif ($uri == '/api/update-customer-data' && $method == 'PATCH') {
+elseif ($uri == '/api/customer/update-customer-data' && $method == 'PATCH') {
     $customer->UpdateCustomerData();
 }
 
-elseif ($uri == '/api/get-my-customer-data' && $method == 'GET') {
+elseif ($uri == '/api/customer/get-my-customer-data' && $method == 'GET') {
     $customer->GetMyCustomerData();
+}
+
+elseif ($uri == '/api/customer/fetch-all-customers' && $method == 'GET') {
+    $customer->GetAllCustomers();
+}
+
+elseif (preg_match('#^/api/customer/fetch-customer/(\d+)$#', $uri, $matches) && $method == 'GET') {
+    $customer->GetCustomerData($matches[1]);
+}
+
+elseif (preg_match('#^/api/customer/update-pharmacist/(\d+)$#', $uri, $matches) && $method == 'PATCH') {
+    $customer->UpdateCustomerDataPharmacist($matches[1]);
 }
 
 // elseif ($uri == '/api/reset-password' && $method == 'POST') {
@@ -54,9 +66,29 @@ elseif ($uri == '/api/get-my-customer-data' && $method == 'GET') {
 //     $auth->reset_password();
 // }
 
+
 // elseif ($uri == '/api/reset-password' && $method == 'POST') {
 //     $auth->reset_password();
 // }
+
+
+// elseif ($uri == '/api/reset-password' && $method == 'POST') {
+//     $auth->reset_password();
+// }
+
+
+// elseif ($uri == '/api/reset-password' && $method == 'POST') {
+//     $auth->reset_password();
+// }
+
+// elseif ($uri == '/api/reset-password' && $method == 'POST') {
+//     $auth->reset_password();
+// }
+
+// elseif ($uri == '/api/reset-password' && $method == 'POST') {
+//     $auth->reset_password();
+// }
+
 
 
 else {
