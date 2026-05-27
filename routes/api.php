@@ -34,6 +34,10 @@ elseif ($uri == '/api/users/fetch-all' && $method == 'GET') {
     $user->FetchAllUsers();
 }
 
+elseif ($uri == '/api/users/update-role' && $method == 'PATCH') {
+    $user->UpdateUserRoles();
+}
+
 // Customer Data
 
 elseif ($uri == '/api/customer/update-customer-data' && $method == 'PATCH') {

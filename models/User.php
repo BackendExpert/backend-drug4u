@@ -64,4 +64,9 @@ class User
 
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    public function UpdateRole (string $email, string $user_role) {
+        $stmt = $this->conn->prepare("UPDATE user SET role = ? WHERE email = ?");
+        return $stmt->execute([$user_role, $email]);
+    }
 }
