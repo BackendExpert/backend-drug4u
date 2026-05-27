@@ -88,30 +88,6 @@ elseif ($uri == '/api/medicine/fetch-notifications' && $method == 'GET') {
     $medicine->FetchAllNotifications();
 }
 
-elseif ($uri == '/api/reset-password' && $method == 'POST') {
-    $auth->reset_password();
-}
-
-// elseif ($uri == '/api/reset-password' && $method == 'POST') {
-//     $auth->reset_password();
-// }
-
-// elseif ($uri == '/api/reset-password' && $method == 'POST') {
-//     $auth->reset_password();
-// }
-
-// elseif ($uri == '/api/reset-password' && $method == 'POST') {
-//     $auth->reset_password();
-// }
-
-// elseif ($uri == '/api/reset-password' && $method == 'POST') {
-//     $auth->reset_password();
-// }
-
-// elseif ($uri == '/api/reset-password' && $method == 'POST') {
-//     $auth->reset_password();
-// }
-
 
 else {
     echo json_encode(["message" => "Route not found"]);
