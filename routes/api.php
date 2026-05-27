@@ -62,6 +62,36 @@ elseif ($uri == '/api/medicine/create' && $method == 'POST') {
     $medicine->CreateMedicine();
 }
 
+elseif ($uri == '/api/medicine/fetch-all' && $method == 'GET') {
+    $medicine->FetchAllMedicien();
+}
+
+elseif (preg_match('#^/api/medicine/fetch-byid/(\d+)$#', $uri, $matches) && $method == 'GET') {
+    $medicine->FetchMedicienByID($matches[1]);
+}
+
+
+elseif (preg_match('#^/api/medicine/update-byid/(\d+)$#', $uri, $matches) && $method == 'PATCH') {
+    $medicine->UpdateMedicineDate($matches[1]);
+}
+
+
+elseif (preg_match('#^/api/medicine/purchase/(\d+)$#', $uri, $matches) && $method == 'PATCH') {
+    $medicine->MedicinePurchase($matches[1]);
+}
+
+elseif ($uri == '/api/medicine/fetch-notifications' && $method == 'GET') {
+    $medicine->FetchAllNotifications();
+}
+
+elseif ($uri == '/api/reset-password' && $method == 'POST') {
+    $auth->reset_password();
+}
+
+// elseif ($uri == '/api/reset-password' && $method == 'POST') {
+//     $auth->reset_password();
+// }
+
 // elseif ($uri == '/api/reset-password' && $method == 'POST') {
 //     $auth->reset_password();
 // }
@@ -70,17 +100,6 @@ elseif ($uri == '/api/medicine/create' && $method == 'POST') {
 //     $auth->reset_password();
 // }
 
-
-// elseif ($uri == '/api/reset-password' && $method == 'POST') {
-//     $auth->reset_password();
-// }
-
-
-// elseif ($uri == '/api/reset-password' && $method == 'POST') {
-//     $auth->reset_password();
-// }
-
-
 // elseif ($uri == '/api/reset-password' && $method == 'POST') {
 //     $auth->reset_password();
 // }
@@ -88,11 +107,6 @@ elseif ($uri == '/api/medicine/create' && $method == 'POST') {
 // elseif ($uri == '/api/reset-password' && $method == 'POST') {
 //     $auth->reset_password();
 // }
-
-// elseif ($uri == '/api/reset-password' && $method == 'POST') {
-//     $auth->reset_password();
-// }
-
 
 
 else {
